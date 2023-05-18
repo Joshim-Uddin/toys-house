@@ -4,6 +4,7 @@ import ToyCard from "./ToyCard";
 
 const ShopByCategory = () => {
   const [toys, setToys] = useState([]);
+  const [singleToy, setSingleToy] = useState();
   const [active, setActive] = useState("");
 
   const url = active
@@ -16,6 +17,10 @@ const ShopByCategory = () => {
   }, [url, active]);
   const handleTab = (value) => {
     setActive(value);
+  };
+  const handleDetails = (id) => {
+    const findToy = toys.find((toy) => toy._id == id);
+    setSingleToy(findToy);
   };
   return (
     <div>
@@ -54,7 +59,12 @@ const ShopByCategory = () => {
       </div>
       <div className="grid lg:grid-cols-3 gap-5 my-8">
         {toys.map((toy) => (
-          <ToyCard key={toy._id} toy={toy} />
+          <ToyCard
+            key={toy._id}
+            toy={toy}
+            handleDetails={handleDetails}
+            singleToy={singleToy}
+          />
         ))}
       </div>
     </div>
