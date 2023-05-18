@@ -70,3 +70,10 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+
+.btn-circle{
+  @apply bg-[#00798C] hover:bg-[#D1495B]
+}
+.custom{
+  @apply bg-[#EDAE49] text-black hover:bg-[#D1495B] hover:text-white
+}

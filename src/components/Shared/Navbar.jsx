@@ -1,13 +1,17 @@
 import React from "react";
 import logo from "./../../assets/logo.png";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav>
-      <img src={logo} alt="" />
-      <h3>Toys House</h3>
-      <div>
+    <nav className="flex items-center justify-between h-20 px-6 bg-[#7A1F2B] text-white">
+      <div className="flex items-center">
+        <Link to="/" className="flex items-center">
+          <img src={logo} alt="" className="h-12 m-0" />
+          <h3 className="text-2xl font-semibold m-0">Toys House</h3>
+        </Link>
+      </div>
+      <div className="flex gap-4 text-lg">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/alltoys">All Toys</NavLink>
         <NavLink to="/mytoys">My Toys</NavLink>
