@@ -75,5 +75,8 @@ button:focus-visible {
   @apply bg-[#00798C] hover:bg-[#D1495B]
 }
 .custom{
-  @apply bg-[#EDAE49] text-black hover:bg-[#D1495B] hover:text-white
+  @apply bg-[#EDAE49] text-black border-0 hover:bg-[#D1495B] hover:text-white
+}
+.input{
+  @apply w-full
 }
