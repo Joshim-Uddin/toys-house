@@ -3,20 +3,21 @@ import { Rating } from "@smastrom/react-rating";
 
 import "@smastrom/react-rating/style.css";
 import { AuthContext } from "../Providers/AuthProviders";
-import { Navigate, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import ViewDetailsModal from "./ViewDetailsModal";
+import { Toaster, toast } from "react-hot-toast";
 
 const ToyCard = ({ toy, handleDetails, singleToy }) => {
   const { user, loading } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   const location = useLocation();
-  const { photoUrl, price, name, rating } = toy;
+  const { photoUrl, price, name, rating, _id } = toy;
 
-  const handleViewDetails = (id) => {
+  const handleViewDetails = () => {
     if (!user) {
+      toast.error("You are not logged in");
       return <Navigate to="/login"></Navigate>;
     }
-    handleDetails(id);
   };
 
   return (
@@ -38,12 +39,14 @@ const ToyCard = ({ toy, handleDetails, singleToy }) => {
           </div>
         </div>
         <div className="card-actions">
-          <label htmlFor="my-modal-6" className="btn btn-primary">
-            View Details
-          </label>
+          <Link to={`/toy/${_id}`}>
+            <button className="btn btn-primary" onClick={handleViewDetails}>
+              View Details
+            </button>
+          </Link>
         </div>
       </div>
-      <ViewDetailsModal />
+      <Toaster />
     </div>
   );
 };

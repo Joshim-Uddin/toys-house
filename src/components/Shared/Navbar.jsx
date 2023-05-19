@@ -26,8 +26,8 @@ const Navbar = () => {
           <NavLink to="/">Home</NavLink>
           <NavLink to="/alltoys">All Toys</NavLink>
           <NavLink to="/blogs">Blogs</NavLink>
-          <NavLink to="/mytoys">My Toys</NavLink>
-          <NavLink to="/addtoy">Add a Toy</NavLink>
+          {user ? <NavLink to="/mytoys">My Toys</NavLink> : ""}
+          {user ? <NavLink to="/addtoy">Add a Toy</NavLink> : ""}
           {user ? (
             <div className="tooltip tooltip-bottom" data-tip={user.displayName}>
               <img
@@ -63,8 +63,8 @@ const Navbar = () => {
           <NavLink to="/">Home</NavLink>
           <NavLink to="/alltoys">All Toys</NavLink>
           <NavLink to="/blogs">Blogs</NavLink>
-          <NavLink to="/mytoys">My Toys</NavLink>
-          <NavLink to="/addtoy">Add a Toy</NavLink>
+          {user ? <NavLink to="/mytoys">My Toys</NavLink> : ""}
+          {user ? <NavLink to="/addtoy">Add a Toy</NavLink> : ""}
           {user ? (
             <div className="tooltip tooltip-right" data-tip={user.displayName}>
               <img

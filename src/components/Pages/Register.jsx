@@ -34,6 +34,14 @@ const Register = () => {
       })
       .catch((err) => console.log(err));
   };
+  const handleGoogleSingIn = () => {
+    googleSignIn()
+      .then((result) => {
+        const currentUser = result.user;
+        navigate(from, { replace: true });
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="hero min-h-screen bg-base-200 py-8">
@@ -101,7 +109,7 @@ const Register = () => {
           <div className="divider w-11/12 mx-auto">OR</div>
           <div className="w-11/12 mx-auto px-2 my-4">
             <button
-              onClick={googleSignIn}
+              onClick={handleGoogleSingIn}
               className="btn custom w-full flex items-center gap-5 normal-case"
             >
               <FaGoogle /> Login With Google
