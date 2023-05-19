@@ -1,9 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
+import { Toaster, toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
-const MyToyDataTable = ({ toys, toy, index }) => {
-  const [id, setId] = useState({});
-  const { price, availableQuantity, subCategory, name, description, _id } = toy;
+const MyToyDataTable = ({ toy, index, deleteOpt }) => {
+  const { price, availableQuantity, subCategory, name, _id } = toy;
+
+  const handleDelete = () => {
+    fetch(`http://localhost:5000/toy/${_id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+    deleteOpt(_id);
+  };
   return (
     <>
       <tr className="text-center">
@@ -18,7 +28,31 @@ const MyToyDataTable = ({ toys, toy, index }) => {
           </Link>
         </td>
         <td>
-          <button className="btn btn-error">Delete</button>
+          <button
+            className="btn btn-error"
+            onClick={() =>
+              Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  handleDelete();
+                  Swal.fire(
+                    "Deleted!",
+                    "Your file has been deleted.",
+                    "success"
+                  );
+                }
+              })
+            }
+          >
+            Delete
+          </button>
         </td>
       </tr>
     </>

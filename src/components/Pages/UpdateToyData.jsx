@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Form, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProviders";
-import { Toaster, toast } from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const UpdateToyData = () => {
   const toy = useLoaderData();
@@ -25,7 +25,13 @@ const UpdateToyData = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
-          toast.success("Toy Data Updated Successfully");
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Toy updated successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
           form.reset();
         }
       });
@@ -72,7 +78,6 @@ const UpdateToyData = () => {
           <input type="submit" value="Add Toy" className="btn custom" />
         </div>
       </Form>
-      <Toaster />
     </div>
   );
 };

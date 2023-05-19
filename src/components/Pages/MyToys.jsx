@@ -10,6 +10,10 @@ const MyToys = () => {
       .then((res) => res.json())
       .then((data) => setMyToys(data));
   }, [user]);
+  const deleteOpt = (id) => {
+    const remaining = mytoys.filter((t) => t._id != id);
+    setMyToys(remaining);
+  };
   return (
     <div className="my-12">
       <h2 className="my-8 text-4xl font-semibold text-center">My Toys</h2>
@@ -30,7 +34,12 @@ const MyToys = () => {
           </thead>
           <tbody>
             {mytoys?.map((toy, index) => (
-              <MyToyDataTable key={toy._id} toy={toy} index={index} />
+              <MyToyDataTable
+                key={toy._id}
+                toy={toy}
+                index={index}
+                deleteOpt={deleteOpt}
+              />
             ))}
           </tbody>
         </table>

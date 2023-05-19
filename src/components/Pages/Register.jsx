@@ -3,7 +3,7 @@ import { FaEye, FaGoogle } from "react-icons/fa";
 import { Form, Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProviders";
 import { updateProfile } from "firebase/auth";
-import toast, { Toaster } from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const [show, setShow] = useState(false);
@@ -26,11 +26,25 @@ const Register = () => {
           photoURL: photoUrl,
         })
           .then(() => {
-            toast.success("Profile Updated Successfully");
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Profile updated successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
             navigate(from, { replace: true });
             form.reset();
           })
-          .catch(() => toast.error("Profile Update Failed"));
+          .catch(() =>
+            Swal.fire({
+              position: "top-end",
+              icon: "error",
+              title: "Profile Update Error",
+              showConfirmButton: false,
+              timer: 1500,
+            })
+          );
       })
       .catch((err) => console.log(err));
   };
@@ -49,7 +63,6 @@ const Register = () => {
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold">Register now!</h1>
         </div>
-        <Toaster />
         <div className="card flex-shrink-0 lg:w-1/2 shadow-2xl bg-base-100">
           <Form onSubmit={handleSignUp} className="card-body">
             <div className="form-control">

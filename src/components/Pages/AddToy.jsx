@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Form } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProviders";
-import { Toaster, toast } from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const AddToy = () => {
   const { user } = useContext(AuthContext);
@@ -38,7 +38,12 @@ const AddToy = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId != 0) {
-          toast.success("Toy added successfully");
+          Swal.fire({
+            icon: "success",
+            title: "Toy Added Successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         }
 
         form.reset();
@@ -47,7 +52,6 @@ const AddToy = () => {
   return (
     <div className="my-12">
       <h2 className="text-3xl font-semibold text-center mb-8">Add A Toy</h2>
-      <Toaster />
       <Form onSubmit={handleAddToy} className="w-9/12 mx-auto">
         <div className="grid lg:grid-cols-2 gap-4">
           <div>

@@ -1,13 +1,11 @@
 import React, { useContext, useState } from "react";
 import { Rating } from "@smastrom/react-rating";
-
 import "@smastrom/react-rating/style.css";
 import { AuthContext } from "../Providers/AuthProviders";
 import { Link, Navigate, useLocation } from "react-router-dom";
-import ViewDetailsModal from "./ViewDetailsModal";
-import { Toaster, toast } from "react-hot-toast";
+import Swal from "sweetalert2";
 
-const ToyCard = ({ toy, handleDetails, singleToy }) => {
+const ToyCard = ({ toy }) => {
   const { user, loading } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   const location = useLocation();
@@ -15,7 +13,13 @@ const ToyCard = ({ toy, handleDetails, singleToy }) => {
 
   const handleViewDetails = () => {
     if (!user) {
-      toast.error("You are not logged in");
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "You are not logged in",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       return <Navigate to="/login"></Navigate>;
     }
   };
@@ -26,7 +30,7 @@ const ToyCard = ({ toy, handleDetails, singleToy }) => {
         <img
           src={photoUrl}
           alt="Toy Image"
-          className="rounded-xl h-44 w-full"
+          className="rounded-xl h-52 w-full"
         />
       </figure>
       <div className="card-body items-center text-center">
@@ -46,7 +50,6 @@ const ToyCard = ({ toy, handleDetails, singleToy }) => {
           </Link>
         </div>
       </div>
-      <Toaster />
     </div>
   );
 };
