@@ -1,12 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Rating } from "@smastrom/react-rating";
 
 import "@smastrom/react-rating/style.css";
 import { AuthContext } from "../Providers/AuthProviders";
 import { Navigate, useLocation } from "react-router-dom";
+import ViewDetailsModal from "./ViewDetailsModal";
 
 const ToyCard = ({ toy, handleDetails, singleToy }) => {
   const { user, loading } = useContext(AuthContext);
+  const [showModal, setShowModal] = useState(false);
   const location = useLocation();
   const { photoUrl, price, name, rating } = toy;
 
@@ -41,26 +43,7 @@ const ToyCard = ({ toy, handleDetails, singleToy }) => {
           </label>
         </div>
       </div>
-      <input type="checkbox" id="my-modal-6" className="modal-toggle" />
-      {user ? (
-        <div className="modal modal-bottom sm:modal-middle">
-          <div className="modal-box">
-            <h3 className="font-bold text-xl">{singleToy?.name}</h3>
-            <p className="py-4">{singleToy?.description}</p>
-            <div>
-              <p>Available Quantity: {singleToy?.availableQuantity}</p>
-              <p>Seller : {singleToy?.seller}</p>
-            </div>
-            <div className="modal-action">
-              <label htmlFor="my-modal-6" className="btn">
-                Close
-              </label>
-            </div>
-          </div>
-        </div>
-      ) : (
-        ""
-      )}
+      <ViewDetailsModal />
     </div>
   );
 };

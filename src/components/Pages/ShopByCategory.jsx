@@ -23,8 +23,10 @@ const ShopByCategory = () => {
     setSingleToy(findToy);
   };
   return (
-    <div>
-      <h2 className="text-3xl text-center">Shop by Category</h2>
+    <div className="my-12">
+      <h2 className="text-4xl text-center font-semibold mb-10">
+        Shop by Category
+      </h2>
       <div className="tab-container flex justify-center items-center my-5 w-full mx-auto ">
         <div
           className={
