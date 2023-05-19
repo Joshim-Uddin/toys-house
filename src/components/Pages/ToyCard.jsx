@@ -11,6 +11,9 @@ const ToyCard = ({ toy, handleDetails, singleToy }) => {
   const { photoUrl, price, name, rating } = toy;
 
   const handleViewDetails = (id) => {
+    if (!user) {
+      return <Navigate to="/login"></Navigate>;
+    }
     handleDetails(id);
   };
 
@@ -33,31 +36,31 @@ const ToyCard = ({ toy, handleDetails, singleToy }) => {
           </div>
         </div>
         <div className="card-actions">
-          <label
-            htmlFor="my-modal-6"
-            onClick={() => handleViewDetails(toy._id)}
-            className="btn btn-primary"
-          >
+          <label htmlFor="my-modal-6" className="btn btn-primary">
             View Details
           </label>
         </div>
       </div>
       <input type="checkbox" id="my-modal-6" className="modal-toggle" />
-      <div className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box">
-          <h3 className="font-bold text-xl">{singleToy?.name}</h3>
-          <p className="py-4">{singleToy?.description}</p>
-          <div>
-            <p>Available Quantity: {singleToy?.availableQuantity}</p>
-            <p>Seller : {singleToy?.seller}</p>
-          </div>
-          <div className="modal-action">
-            <label htmlFor="my-modal-6" className="btn">
-              Close
-            </label>
+      {user ? (
+        <div className="modal modal-bottom sm:modal-middle">
+          <div className="modal-box">
+            <h3 className="font-bold text-xl">{singleToy?.name}</h3>
+            <p className="py-4">{singleToy?.description}</p>
+            <div>
+              <p>Available Quantity: {singleToy?.availableQuantity}</p>
+              <p>Seller : {singleToy?.seller}</p>
+            </div>
+            <div className="modal-action">
+              <label htmlFor="my-modal-6" className="btn">
+                Close
+              </label>
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
