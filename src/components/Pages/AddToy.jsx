@@ -130,9 +130,7 @@ const AddToy = () => {
             name="description"
             id="description"
             placeholder="Detail description"
-            cols="30"
-            rows="10"
-            className="input input-info resize-none"
+            className="input input-info resize-none h-24 p-2"
           ></textarea>
         </div>
         <div className="flex items-center justify-center my-5">

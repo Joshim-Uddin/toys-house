@@ -48,11 +48,11 @@ const ToyGallery = () => {
     { src: `${carFifteen}`, width: 50, height: 50 },
   ];
   return (
-    <div className="my-12" data-aos="fade-left">
+    <div className="my-12" data-aos="zoom-out">
       <h3 className="text-4xl font-semibold text-center my-12">
         Toy Car Gallery
       </h3>
-      <div className="bg-[#104460] p-5 shadow-lg shadow-slate-400">
+      <div className="bg-[#179de5] p-5 shadow-lg shadow-slate-400">
         <PhotoAlbum layout="rows" photos={photos} />
       </div>
     </div>

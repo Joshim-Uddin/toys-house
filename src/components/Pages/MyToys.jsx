@@ -34,7 +34,7 @@ const MyToys = () => {
         <select
           name="sort by price"
           id="sort by price"
-          className="ms-3 border border-black"
+          className="ms-3 border border-black p-2"
           onChange={handleSortByPrice}
         >
           <option value="1">Low to High</option>

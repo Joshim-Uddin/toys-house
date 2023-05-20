@@ -15,7 +15,7 @@ const Navbar = () => {
   };
   return (
     <>
-      <nav className="max-[600px]:hidden flex items-center justify-between h-20 px-6 bg-[#7A1F2B] text-white">
+      <nav className="max-[600px]:hidden flex items-center justify-between h-28 px-6 bg-[#7A1F2B] text-white">
         <div className="flex items-center">
           <Link to="/" className="flex items-center">
             <img src={logo} alt="" className="h-12 m-0" />

@@ -68,7 +68,7 @@ const UpdateToyData = () => {
             defaultValue={description}
             id="description"
             placeholder="Detail description"
-            className="input input-info resize-none"
+            className="input input-info resize-none p-2 h-24"
           ></textarea>
         </div>
         <div className="flex items-center justify-center my-5">
