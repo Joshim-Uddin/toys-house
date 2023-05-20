@@ -1,14 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { AuthContext } from "../Providers/AuthProviders";
 import { Link, Navigate, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
+import Aos from "aos";
 
 const ToyCard = ({ toy }) => {
   const { user, loading } = useContext(AuthContext);
-  const [showModal, setShowModal] = useState(false);
-  const location = useLocation();
   const { photoUrl, price, name, rating, _id } = toy;
 
   const handleViewDetails = () => {

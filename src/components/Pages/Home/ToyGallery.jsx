@@ -1,7 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PhotoAlbum from "react-photo-album";
-import Lightbox from "yet-another-react-lightbox";
-import "yet-another-react-lightbox/styles.css";
 import carOne from "./../../../assets/gallery/car7.png";
 import carTwo from "./../../../assets/gallery/car8.png";
 import carThree from "./../../../assets/gallery/car9.png";
@@ -17,8 +15,21 @@ import carTwelve from "./../../../assets/gallery/truck2.png";
 import carThirteen from "./../../../assets/gallery/truck3.png";
 import carFourteen from "./../../../assets/gallery/truck4.png";
 import carFifteen from "./../../../assets/gallery/truck7.png";
+import Aos from "aos";
 
 const ToyGallery = () => {
+  const [scrolling, setScrolling] = useState(false);
+  const [scrollTop, setScrollTop] = useState(0);
+  useEffect(() => {
+    Aos.init({ duration: 2000, disable: "mobile" });
+    const onScroll = (e) => {
+      setScrollTop(e.target.documentElement.scrollTop);
+      setScrolling(e.target.documentElement.scrollTop > scrollTop);
+    };
+    window.addEventListener("scroll", onScroll);
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [scrollTop]);
   const photos = [
     { src: `${carOne}`, width: 50, height: 50 },
     { src: `${carTwo}`, width: 50, height: 50 },
@@ -37,7 +48,7 @@ const ToyGallery = () => {
     { src: `${carFifteen}`, width: 50, height: 50 },
   ];
   return (
-    <div className="my-12">
+    <div className="my-12" data-aos="fade-left">
       <h3 className="text-4xl font-semibold text-center my-12">
         Toy Car Gallery
       </h3>

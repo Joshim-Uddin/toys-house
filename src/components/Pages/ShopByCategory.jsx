@@ -1,12 +1,25 @@
 import { data } from "autoprefixer";
 import React, { useEffect, useState } from "react";
 import ToyCard from "./ToyCard";
+import Aos from "aos";
 
 const ShopByCategory = () => {
   const [toys, setToys] = useState([]);
   const [singleToy, setSingleToy] = useState();
   const [active, setActive] = useState("");
 
+  const [scrolling, setScrolling] = useState(false);
+  const [scrollTop, setScrollTop] = useState(0);
+  useEffect(() => {
+    Aos.init({ duration: 1000, disable: "mobile" });
+    const onScroll = (e) => {
+      setScrollTop(e.target.documentElement.scrollTop);
+      setScrolling(e.target.documentElement.scrollTop > scrollTop);
+    };
+    window.addEventListener("scroll", onScroll);
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [scrollTop]);
   const url = active
     ? `http://localhost:5000/alltoys/${active}`
     : `http://localhost:5000/alltoys/text`;
@@ -23,7 +36,7 @@ const ShopByCategory = () => {
     setSingleToy(findToy);
   };
   return (
-    <div className="my-12">
+    <div className="my-12" data-aos="zoom-in">
       <h2 className="text-4xl text-center font-semibold mb-10">
         Shop by Category
       </h2>

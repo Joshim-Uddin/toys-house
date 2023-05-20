@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from "react";
+import React, { useEffect } from "react";
 import imgOne from "./../../../assets/showcase/showcase1.jpg";
 import imgTwo from "./../../../assets/showcase/showcase2.jpg";
 import imgThree from "./../../../assets/showcase/showcase3.webp";
