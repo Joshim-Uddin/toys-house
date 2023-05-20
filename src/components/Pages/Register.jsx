@@ -27,7 +27,6 @@ const Register = () => {
         })
           .then(() => {
             Swal.fire({
-              position: "center",
               icon: "success",
               title: "Profile updated successfully",
               showConfirmButton: false,

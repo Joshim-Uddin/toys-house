@@ -14,7 +14,6 @@ const ToyCard = ({ toy }) => {
   const handleViewDetails = () => {
     if (!user) {
       Swal.fire({
-        position: "center",
         icon: "error",
         title: "You are not logged in",
         showConfirmButton: false,
@@ -25,7 +24,7 @@ const ToyCard = ({ toy }) => {
   };
 
   return (
-    <div className="card w-96 bg-base-100 shadow-xl">
+    <div className="card bg-base-100 shadow-xl">
       <figure className="px-10 pt-10">
         <img
           src={photoUrl}
@@ -35,7 +34,7 @@ const ToyCard = ({ toy }) => {
       </figure>
       <div className="card-body items-center text-center">
         <h2 className="card-title my-4">{name}</h2>
-        <div className="flex justify-between items-center gap-16 mb-4">
+        <div className="flex md:flex-row flex-col justify-between items-center gap-8 mb-4">
           <p>Price : $ {price}</p>
           <div className="flex items-center gap-3">
             <Rating style={{ maxWidth: 120 }} value={rating} readOnly />{" "}

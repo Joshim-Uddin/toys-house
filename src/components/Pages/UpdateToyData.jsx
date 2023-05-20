@@ -26,7 +26,6 @@ const UpdateToyData = () => {
       .then((data) => {
         if (data.modifiedCount > 0) {
           Swal.fire({
-            position: "center",
             icon: "success",
             title: "Toy updated successfully",
             showConfirmButton: false,
@@ -37,10 +36,10 @@ const UpdateToyData = () => {
       });
   };
   return (
-    <div className="my-12">
+    <div className="w-full my-12">
       <h3 className="text-3xl font-semibold my-8 text-center">Update a toy</h3>
-      <Form onSubmit={handleUpdateToy} className="w-9/12 mx-auto">
-        <div className="grid lg:grid-cols-2 gap-4">
+      <Form onSubmit={handleUpdateToy} className="lg:w-9/12 w-full lg:mx-auto">
+        <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
           <div>
             <label htmlFor="price">Price</label>
             <input
@@ -69,8 +68,6 @@ const UpdateToyData = () => {
             defaultValue={description}
             id="description"
             placeholder="Detail description"
-            cols="30"
-            rows="10"
             className="input input-info resize-none"
           ></textarea>
         </div>

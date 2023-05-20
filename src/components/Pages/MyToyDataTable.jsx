@@ -1,5 +1,4 @@
 import React from "react";
-import { Toaster, toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 

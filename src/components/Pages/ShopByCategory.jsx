@@ -59,7 +59,7 @@ const ShopByCategory = () => {
           Truck
         </div>
       </div>
-      <div className="grid lg:grid-cols-3 gap-5 my-8">
+      <div className="grid lg:grid-cols-3 grid-cols-1 gap-5 my-8">
         {toys.map((toy) => (
           <ToyCard
             key={toy._id}

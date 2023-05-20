@@ -56,7 +56,7 @@ const Navbar = () => {
         <div
           className={
             clicked
-              ? `flex flex-col gap-2 ps-4 relative top-0 left-0 pb-3`
+              ? `flex flex-col items-start gap-2 ps-4 relative top-0 left-0 pb-3`
               : `flex flex-col gap-2 ps-4 absolute -top-64`
           }
         >
