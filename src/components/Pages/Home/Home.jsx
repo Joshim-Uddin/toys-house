@@ -3,12 +3,10 @@ import Showcase from "./Showcase";
 import ShopByCategory from "../ShopByCategory";
 import ToyGallery from "./ToyGallery";
 import Aos from "aos";
-import "aos/dist/aos.css";
+import useTitle from "../../Hooks/useTitle";
 
 const Home = () => {
-  useEffect(() => {
-    Aos.init({ duration: 3000 });
-  }, []);
+  useTitle("Home");
   return (
     <>
       <Showcase data-aos="fade-zoom-in" />
