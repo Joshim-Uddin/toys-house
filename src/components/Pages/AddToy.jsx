@@ -14,7 +14,7 @@ const AddToy = () => {
     const email = form.email.value;
     const seller = form.seller.value;
     const subCategory = form.subcategory.value;
-    const price = form.price.value;
+    const price = parseInt(form.price.value);
     const rating = form.rating.value;
     const photoUrl = form.photoUrl.value;
     const availableQuantity = form.quantity.value;

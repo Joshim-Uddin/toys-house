@@ -12,13 +12,35 @@ const MyToys = () => {
       .then((res) => res.json())
       .then((data) => setMyToys(data));
   }, [user]);
+
+  //Delete a toy function
   const deleteOpt = (id) => {
     const remaining = mytoys.filter((t) => t._id != id);
     setMyToys(remaining);
   };
+
+  //sort by price function
+  const handleSortByPrice = (e) => {
+    const value = e.target.value;
+    fetch(`http://localhost:5000/alltoy?email=${user?.email}&sort=${value}`)
+      .then((res) => res.json())
+      .then((data) => setMyToys(data));
+  };
   return (
     <div className="my-12">
       <h2 className="my-8 text-4xl font-semibold text-center">My Toys</h2>
+      <div className="mb-8 text-right me-4">
+        <label htmlFor="sort by price">Sort by price</label>
+        <select
+          name="sort by price"
+          id="sort by price"
+          className="ms-3 border border-black"
+          onChange={handleSortByPrice}
+        >
+          <option value="1">Low to High</option>
+          <option value="-1">High to Low</option>
+        </select>
+      </div>
       <div className="overflow-x-auto">
         <table className="table table-zebra table-compact w-full">
           {/* head */}
