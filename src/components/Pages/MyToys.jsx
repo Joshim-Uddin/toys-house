@@ -24,8 +24,6 @@ const MyToys = () => {
       .then((data) => {
         if (!data.error) {
           setMyToys(data);
-        } else {
-          navigate("/");
         }
       });
   }, [user, navigate]);
@@ -40,10 +38,21 @@ const MyToys = () => {
   const handleSortByPrice = (e) => {
     const value = e.target.value;
     fetch(
-      `https://b7a11-toy-marketplace-server-side-joshim-uddin.vercel.app/alltoy?email=${user?.email}&sort=${value}`
+      `https://b7a11-toy-marketplace-server-side-joshim-uddin.vercel.app/alltoy?email=${user?.email}&sort=${value}`,
+      {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("toys-house-token")}`,
+        },
+      }
     )
       .then((res) => res.json())
-      .then((data) => setMyToys(data));
+      .then((data) => {
+        if (!data.error) {
+          setMyToys(data);
+        }
+      });
   };
   return (
     <div className="my-12">
@@ -77,7 +86,7 @@ const MyToys = () => {
               </tr>
             </thead>
             <tbody>
-              {myToys?.map((toy, index) => (
+              {myToys.map((toy, index) => (
                 <MyToyDataTable
                   key={toy._id}
                   toy={toy}
@@ -89,7 +98,7 @@ const MyToys = () => {
           </table>
         </div>
       ) : (
-        <p className="text-center text-2xl">No Data Found</p>
+        ""
       )}
     </div>
   );

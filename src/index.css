@@ -78,5 +78,5 @@ button:focus-visible {
   @apply lg:w-11/12 mx-auto
 }
 body {
-  @apply bg-amber-50
+  @apply bg-amber-50 text-black
 }

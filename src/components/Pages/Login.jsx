@@ -26,8 +26,8 @@ const Login = () => {
     } else {
       logIn(email, password)
         .then((result) => {
-          result.user;
-          navigate(location.state.pathname || "/");
+          const currentUser = result.user;
+          navigate(from, { replace: true });
         })
         .catch((err) => setError("Email and password doesn't match"));
     }

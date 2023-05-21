@@ -3,7 +3,6 @@ import { FaEye, FaGoogle } from "react-icons/fa";
 import { Form, Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProviders";
 import { updateProfile } from "firebase/auth";
-import Swal from "sweetalert2";
 
 const Register = () => {
   const [show, setShow] = useState(false);
@@ -40,24 +39,10 @@ const Register = () => {
             photoURL: photoUrl,
           })
             .then(() => {
-              Swal.fire({
-                icon: "success",
-                title: "Profile updated successfully",
-                showConfirmButton: false,
-                timer: 1500,
-              });
               navigate(from, { replace: true });
               form.reset();
             })
-            .catch(() =>
-              Swal.fire({
-                position: "top-end",
-                icon: "error",
-                title: "Profile Update Error",
-                showConfirmButton: false,
-                timer: 1500,
-              })
-            );
+            .catch((err) => err.message);
         })
         .catch((err) => {
           err.message;

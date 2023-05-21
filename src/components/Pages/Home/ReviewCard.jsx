@@ -2,7 +2,7 @@ import React from "react";
 
 const ReviewCard = ({ comment }) => {
   return (
-    <div className="card card-side bg-base-100 text-black shadow-xl">
+    <div className="card card-side bg-white text-black shadow-xl">
       <figure></figure>
       <div className="card-body relative">
         <p>{comment.message}</p>

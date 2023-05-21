@@ -32,18 +32,20 @@ const Blogs = () => {
   ];
   return (
     <div>
-      <h3 className="text-4xl my-8 text-center font-semibold">
+      <h3 className="text-4xl my-8 text-center text-black font-semibold">
         Welcome to Our Blogs
       </h3>
       <div>
         {blogs.map((blog) => (
           <div key={blog.id} className="my-5 ">
             <h4 className="mb-4 bg-[#59656F] text-white p-2 lg:text-xl">
-              <span className="font-bold underline italic">Question:</span>{" "}
+              <span className="font-bold  underline italic">Question:</span>{" "}
               {blog.question}
             </h4>
             <p className="p-2 lg:text-lg text-justify">
-              <span className="font-bold underline italic">Answer:</span>{" "}
+              <span className="font-bold text-black underline italic">
+                Answer:
+              </span>{" "}
               {blog.answer}
             </p>
           </div>
