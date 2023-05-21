@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReviewCard from "./ReviewCard";
-import { Form } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import Aos from "aos";
 
@@ -66,7 +66,9 @@ const ClientReview = () => {
             We appreciate your kind and honest feedback and invite you to our
             amazing store.
           </p>
-          <button className="btn custom">About Us</button>
+          <Link to="/aboutus">
+            <button className="btn custom">About Us</button>
+          </Link>
         </div>
         <div className="grid col-span-2 lg:grid-cols-2 gap-3">
           {comments?.slice(0, 2).map((comment) => (

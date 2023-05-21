@@ -12,6 +12,7 @@ import Register from "../components/Pages/Register";
 import PrivateRoutes from "./PrivateRoutes";
 import SingleToyDetails from "../components/Pages/SingleToyDetails";
 import UpdateToyData from "../components/Pages/UpdateToyData";
+import AboutUsPage from "../components/Pages/AboutUs";
 
 const router = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
           fetch(
             `https://b7a11-toy-marketplace-server-side-joshim-uddin.vercel.app/toy/${params.id}`
           ),
+      },
+      {
+        path: "/aboutus",
+        element: <AboutUsPage />,
       },
     ],
   },
