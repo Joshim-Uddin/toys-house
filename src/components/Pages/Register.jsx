@@ -8,45 +8,91 @@ import Swal from "sweetalert2";
 const Register = () => {
   const [show, setShow] = useState(false);
   const { signUp, googleSignIn } = useContext(AuthContext);
+  const [error, setError] = useState("");
+
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+
   const location = useLocation();
   const navigate = useNavigate();
   const from = location?.state?.pathname || "/";
+
   const handleSignUp = (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
     const photoUrl = form.photoUrl.value;
-    const email = form.email.value;
-    const password = form.password.value;
-    signUp(email, password)
-      .then((result) => {
-        const currentUser = result.user;
-        updateProfile(currentUser, {
-          displayName: name,
-          photoURL: photoUrl,
-        })
-          .then(() => {
-            Swal.fire({
-              icon: "success",
-              title: "Profile updated successfully",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-            navigate(from, { replace: true });
-            form.reset();
+    if (email.length === 0) {
+      setEmailError("Email is required");
+      return;
+    } else if (password.length === 0) {
+      setPasswordError("Password is required");
+      return;
+    } else {
+      signUp(email, password, name, photoUrl)
+        .then((result) => {
+          const currentUser = result.user;
+          updateProfile(currentUser, {
+            displayName: name,
+            photoURL: photoUrl,
           })
-          .catch(() =>
-            Swal.fire({
-              position: "top-end",
-              icon: "error",
-              title: "Profile Update Error",
-              showConfirmButton: false,
-              timer: 1500,
+            .then(() => {
+              Swal.fire({
+                icon: "success",
+                title: "Profile updated successfully",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              navigate(from, { replace: true });
+              form.reset();
             })
-          );
-      })
-      .catch((err) => console.log(err));
+            .catch(() =>
+              Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "Profile Update Error",
+                showConfirmButton: false,
+                timer: 1500,
+              })
+            );
+        })
+        .catch((err) => {
+          err.message;
+          setError("Registration Error: " + error.message);
+        });
+    }
   };
+
+  const handleEmailChange = (e) => {
+    const emailInput = e.target.value;
+    setEmail(emailInput);
+    if (
+      !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+        emailInput
+      )
+    ) {
+      setEmailError("Please enter a valid email address");
+    } else {
+      setEmailError("");
+    }
+  };
+  const handlePasswordChange = (e) => {
+    const passwordInput = e.target.value;
+    setPassword(passwordInput);
+    if (
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/.test(
+        passwordInput
+      )
+    ) {
+      setPasswordError("Please enter a valid password");
+    } else {
+      setPasswordError("");
+    }
+  };
+
   const handleGoogleSingIn = () => {
     googleSignIn()
       .then((result) => {
@@ -64,6 +110,11 @@ const Register = () => {
         </div>
         <div className="card flex-shrink-0 lg:w-1/2 shadow-2xl bg-base-100">
           <Form onSubmit={handleSignUp} className="card-body">
+            {error && (
+              <div>
+                <p className="text-red-400">{error}</p>
+              </div>
+            )}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
@@ -82,9 +133,11 @@ const Register = () => {
               <input
                 type="email"
                 name="email"
+                onChange={handleEmailChange}
                 placeholder="email"
                 className="input input-bordered"
               />
+              {emailError && <span className="text-red-400">{emailError}</span>}
             </div>
             <div className="form-control">
               <label className="label">
@@ -104,9 +157,13 @@ const Register = () => {
               <input
                 type={show ? `text` : "password"}
                 name="password"
+                onChange={handlePasswordChange}
                 placeholder="password"
                 className="input input-bordered"
               />
+              {passwordError && (
+                <span className="text-red-400">{passwordError}</span>
+              )}
               <span
                 className="absolute top-14 right-2"
                 onClick={() => setShow(!show)}

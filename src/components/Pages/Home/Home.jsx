@@ -10,8 +10,8 @@ const Home = () => {
   return (
     <>
       <Showcase />
-      <ShopByCategory />
       <ToyGallery />
+      <ShopByCategory />
       <ClientReview />
     </>
   );

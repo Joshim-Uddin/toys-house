@@ -4,23 +4,60 @@ import { Form, Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProviders";
 
 const Login = () => {
-  const { logIn, googleSignIn } = useContext(AuthContext);
+  const { logIn, googleSignIn, resetPassword } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+
   const from = location?.state?.pathname || "/";
   const handleLogin = (e) => {
     e.preventDefault();
-    const form = e.target;
-    const email = form.email.value;
-    const password = form.password.value;
-    logIn(email, password)
-      .then((result) => {
-        const currentUser = result.user;
-        navigate(from, { replace: true });
-        form.reset();
-      })
-      .catch((err) => console.log(err));
+    if (email.length === 0) {
+      setEmailError("Email is required");
+      return;
+    } else if (password.length === 0) {
+      setPasswordError("Password is required");
+      return;
+    } else {
+      logIn(email, password)
+        .then((result) => {
+          result.user;
+          navigate(location.state.pathname || "/");
+        })
+        .catch((err) => setError("Email and password doesn't match"));
+    }
+    setEmail("");
+    setPassword("");
   };
+
+  const handleEmailChange = (e) => {
+    const emailInput = e.target.value;
+    setEmail(emailInput);
+    if (
+      !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+        emailInput
+      )
+    ) {
+      setEmailError("Please enter a valid email address");
+    } else {
+      setEmailError("");
+    }
+  };
+  const handlePasswordChange = (e) => {
+    const passwordInput = e.target.value;
+    setPassword(passwordInput);
+    if (passwordInput.length < 6) {
+      setPasswordError("Password must be at least 6 characters");
+    } else {
+      setPasswordError("");
+    }
+  };
+
   const handleGoogleSingIn = () => {
     googleSignIn()
       .then((result) => {
@@ -30,6 +67,11 @@ const Login = () => {
       .catch((err) => console.log(err));
   };
 
+  const handleForgot = (email) => {
+    resetPassword(email)
+      .then(() => console.log("Password reset email sent"))
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="hero min-h-screen bg-base-200 py-8">
       <div className="hero-content lg:w-9/12 flex-col">
@@ -38,6 +80,11 @@ const Login = () => {
         </div>
         <div className="card flex-shrink-0 lg:w-1/2 shadow-2xl bg-base-100">
           <Form onSubmit={handleLogin} className="card-body">
+            {error && (
+              <div>
+                <p className="text-red-400">{error}</p>
+              </div>
+            )}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -45,9 +92,11 @@ const Login = () => {
               <input
                 type="email"
                 name="email"
+                onChange={handleEmailChange}
                 placeholder="email"
                 className="input input-bordered"
               />
+              {emailError && <span className="text-red-400">{emailError}</span>}
             </div>
             <div className="form-control">
               <label className="label">
@@ -56,15 +105,18 @@ const Login = () => {
               <input
                 type="password"
                 name="password"
+                onChange={handlePasswordChange}
                 placeholder="password"
                 className="input input-bordered"
               />
-
-              <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
-                  Forgot password?
-                </a>
-              </label>
+              {passwordError && (
+                <span className="text-red-400">{passwordError}</span>
+              )}
+            </div>
+            <div className="flex w-full items-center justify-between gap-5">
+              <p className="cursor-pointer" onClick={handleForgot}>
+                Forgot Password
+              </p>
             </div>
             <div className="form-control mt-6">
               <button className="btn btn-info">Login</button>
