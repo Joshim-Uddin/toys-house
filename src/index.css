@@ -72,11 +72,17 @@ button:focus-visible {
   @apply bg-[#EDAE49] text-black border-0 hover:bg-[#D1495B] hover:text-white
 }
 .input{
-  @apply w-full
+  @apply w-full bg-white
 }
 .custom-container{
   @apply lg:w-11/12 mx-auto
 }
 body {
   @apply bg-amber-50 text-black
+}
+input{
+  @apply bg-white
+}
+table{
+  @apply dark:text-[#07F2C7]
 }

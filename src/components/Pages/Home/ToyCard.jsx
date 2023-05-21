@@ -23,7 +23,7 @@ const ToyCard = ({ toy }) => {
   };
 
   return (
-    <div className="card bg-base-100 shadow-xl hover:transition-transform hover:-translate-y-2 hover:duration-500">
+    <div className="card bg-slate-100 shadow-xl hover:transition-transform hover:-translate-y-2 hover:duration-500">
       <figure className="px-10 pt-10">
         <img
           src={photoUrl}

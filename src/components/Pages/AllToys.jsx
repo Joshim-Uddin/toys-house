@@ -47,7 +47,7 @@ const AllToys = () => {
       </div>
       <div>
         <div className="overflow-x-auto">
-          <table className="table table-zebra table-compact w-full">
+          <table className="table table-zebra bg-slate-50 table-compact w-full">
             {/* head */}
             <thead>
               <tr>
