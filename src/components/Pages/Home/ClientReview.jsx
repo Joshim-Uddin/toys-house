@@ -21,7 +21,9 @@ const ClientReview = () => {
   //Aos end
   const [comments, setComments] = useState();
   useEffect(() => {
-    fetch("http://localhost:5000/comments")
+    fetch(
+      "https://b7a11-toy-marketplace-server-side-joshim-uddin.vercel.app/comments"
+    )
       .then((res) => res.json())
       .then((data) => setComments(data));
   }, []);
@@ -31,18 +33,21 @@ const ClientReview = () => {
     const email = form.email.value;
     const message = form.comment.value;
     const review = { name, email, message };
-    fetch("http://localhost:5000/addcomment", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(review),
-    })
+    fetch(
+      "https://b7a11-toy-marketplace-server-side-joshim-uddin.vercel.app/addcomment",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(review),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
           Swal.fire({
             position: "top-end",
-            title: "Comments Added",
-            text: "Thanks you",
+            title: "Review Successful",
+            heightAuto: false,
           });
         }
         form.reset();

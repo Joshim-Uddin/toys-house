@@ -9,13 +9,17 @@ const AllToys = () => {
   const [searchText, setSearchText] = useState("");
   // console.log(searchText);
   useEffect(() => {
-    fetch(`http://localhost:5000/alltoys`)
+    fetch(
+      `https://b7a11-toy-marketplace-server-side-joshim-uddin.vercel.app/alltoys`
+    )
       .then((res) => res.json())
       .then((data) => setToys(data));
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/allname/${searchText}`)
+    fetch(
+      `https://b7a11-toy-marketplace-server-side-joshim-uddin.vercel.app/allname/${searchText}`
+    )
       .then((res) => res.json())
       .then((data) => setToys(data));
   }, [searchText]);

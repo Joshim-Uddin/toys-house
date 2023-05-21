@@ -30,13 +30,16 @@ const AddToy = () => {
       photoUrl,
       description,
     };
-    fetch("http://localhost:5000/addtoy", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(toy),
-    })
+    fetch(
+      "https://b7a11-toy-marketplace-server-side-joshim-uddin.vercel.app/addtoy",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(toy),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId != 0) {
@@ -76,7 +79,7 @@ const AddToy = () => {
             <input
               type="text"
               name="seller"
-              value={user?.displayName}
+              value={user?.displayName || ""}
               readOnly
               placeholder="Seller Name"
               className="input input-info"

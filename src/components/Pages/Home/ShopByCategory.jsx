@@ -21,8 +21,8 @@ const ShopByCategory = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, [scrollTop]);
   const url = active
-    ? `http://localhost:5000/alltoys/${active}`
-    : `http://localhost:5000/alltoys/text`;
+    ? `https://b7a11-toy-marketplace-server-side-joshim-uddin.vercel.app/alltoys/${active}`
+    : `https://b7a11-toy-marketplace-server-side-joshim-uddin.vercel.app/alltoys/text`;
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())

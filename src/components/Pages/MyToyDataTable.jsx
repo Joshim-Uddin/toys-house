@@ -6,9 +6,12 @@ const MyToyDataTable = ({ toy, index, deleteOpt }) => {
   const { price, availableQuantity, subCategory, name, _id } = toy;
 
   const handleDelete = () => {
-    fetch(`http://localhost:5000/toy/${_id}`, {
-      method: "DELETE",
-    })
+    fetch(
+      `https://b7a11-toy-marketplace-server-side-joshim-uddin.vercel.app/toy/${_id}`,
+      {
+        method: "DELETE",
+      }
+    )
       .then((res) => res.json())
       .then((data) => console.log(data));
     deleteOpt(_id);

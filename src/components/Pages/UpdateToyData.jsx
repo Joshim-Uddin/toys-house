@@ -15,13 +15,16 @@ const UpdateToyData = () => {
     const availableQuantity = form.quantity.value;
     const description = form.description.value;
     const updateToy = { price, description, availableQuantity, id };
-    fetch(`http://localhost:5000/update`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(updateToy),
-    })
+    fetch(
+      `https://b7a11-toy-marketplace-server-side-joshim-uddin.vercel.app/update`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(updateToy),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
