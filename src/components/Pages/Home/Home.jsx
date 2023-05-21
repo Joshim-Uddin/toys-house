@@ -4,6 +4,7 @@ import ShopByCategory from "./ShopByCategory";
 import ToyGallery from "./ToyGallery";
 import useTitle from "../../Hooks/useTitle";
 import ClientReview from "./ClientReview";
+import Analytics from "../Analytics";
 
 const Home = () => {
   useTitle("Home");
@@ -13,6 +14,7 @@ const Home = () => {
       <ToyGallery />
       <ShopByCategory />
       <ClientReview />
+      <Analytics />
     </>
   );
 };
