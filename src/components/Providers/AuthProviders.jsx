@@ -51,13 +51,16 @@ const AuthProviders = ({ children }) => {
         const loggedUser = {
           email: currentUser.email,
         };
-        fetch("http://localhost:5000/jwt", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(loggedUser),
-        })
+        fetch(
+          "https://b7a11-toy-marketplace-server-side-joshim-uddin.vercel.app/jwt",
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(loggedUser),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             localStorage.setItem("toys-house-token", data.token);

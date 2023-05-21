@@ -10,13 +10,16 @@ const MyToys = () => {
   const [myToys, setMyToys] = useState();
   const navigate = useNavigate();
   useEffect(() => {
-    fetch(`http://localhost:5000/alltoy?email=${user?.email}`, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("toys-house-token")}`,
-      },
-    })
+    fetch(
+      `https://b7a11-toy-marketplace-server-side-joshim-uddin.vercel.app/alltoy?email=${user?.email}`,
+      {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("toys-house-token")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (!data.error) {
