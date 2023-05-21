@@ -7,7 +7,6 @@ const AllToys = () => {
   useTitle("All Toys");
   const [toys, setToys] = useState([]);
   const [searchText, setSearchText] = useState("");
-  // console.log(searchText);
   useEffect(() => {
     fetch(
       `https://b7a11-toy-marketplace-server-side-joshim-uddin.vercel.app/alltoys`

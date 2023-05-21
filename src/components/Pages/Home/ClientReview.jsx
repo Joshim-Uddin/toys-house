@@ -54,7 +54,7 @@ const ClientReview = () => {
       });
   };
   return (
-    <div className="my-12">
+    <div className="my-12 custom-container overflow-x-hidden">
       <h2 className="text-4xl font-bold text-center mb-8">Reviews</h2>
       <div
         className="grid lg:grid-cols-3 items-center justify-center gap-5 bg-stone-500 text-white p-4"

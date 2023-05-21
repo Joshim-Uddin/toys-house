@@ -2,22 +2,30 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Providers/AuthProviders";
 import MyToyDataTable from "./MyToyDataTable";
 import useTitle from "../Hooks/useTitle";
+import { useNavigate } from "react-router-dom";
 
 const MyToys = () => {
   useTitle("My Toys");
   const { user } = useContext(AuthContext);
   const [myToys, setMyToys] = useState();
+  const navigate = useNavigate();
   useEffect(() => {
-    fetch(
-      `https://b7a11-toy-marketplace-server-side-joshim-uddin.vercel.app/alltoy?email=${user?.email}`
-    )
+    fetch(`http://localhost:5000/alltoy?email=${user?.email}`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("toys-house-token")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
-        if (data) {
+        if (!data.error) {
           setMyToys(data);
+        } else {
+          navigate("/");
         }
       });
-  }, [user]);
+  }, [user, navigate]);
 
   //Delete a toy function
   const deleteOpt = (id) => {

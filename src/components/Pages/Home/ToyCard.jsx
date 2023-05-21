@@ -28,12 +28,12 @@ const ToyCard = ({ toy }) => {
         <img
           src={photoUrl}
           alt="Toy Image"
-          className="rounded-xl h-52 w-full"
+          className="rounded-xl lg:h-52 h-44 w-full"
         />
       </figure>
       <div className="card-body items-center text-center">
-        <h2 className="card-title my-4">{name}</h2>
-        <div className="flex md:flex-row flex-col justify-between items-center gap-8 mb-4">
+        <h2 className="card-title lg:my-4">{name}</h2>
+        <div className="flex md:flex-row flex-col justify-between items-center lg:gap-8 gap-4 mb-4">
           <p>Price : $ {price}</p>
           <div className="flex items-center gap-3">
             <Rating style={{ maxWidth: 120 }} value={rating} readOnly />{" "}

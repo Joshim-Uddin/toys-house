@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PhotoAlbum from "react-photo-album";
 import carOne from "./../../../assets/gallery/car7.png";
 import carTwo from "./../../../assets/gallery/car8.png";
 import carThree from "./../../../assets/gallery/car9.png";
@@ -31,29 +30,44 @@ const ToyGallery = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, [scrollTop]);
   const photos = [
-    { src: `${carOne}`, width: 50, height: 50 },
-    { src: `${carTwo}`, width: 50, height: 50 },
-    { src: `${carThree}`, width: 50, height: 50 },
-    { src: `${carFour}`, width: 50, height: 50 },
-    { src: `${carFive}`, width: 50, height: 50 },
-    { src: `${carSix}`, width: 50, height: 50 },
-    { src: `${carSeven}`, width: 50, height: 50 },
-    { src: `${carEight}`, width: 50, height: 50 },
-    { src: `${carNine}`, width: 50, height: 50 },
-    { src: `${carTen}`, width: 50, height: 50 },
-    { src: `${carEleven}`, width: 50, height: 50 },
-    { src: `${carTwelve}`, width: 50, height: 50 },
-    { src: `${carThirteen}`, width: 50, height: 50 },
-    { src: `${carFourteen}`, width: 50, height: 50 },
-    { src: `${carFifteen}`, width: 50, height: 50 },
+    { src: `${carOne}`, name: "Simple Car" },
+    { src: `${carTwo}`, name: "Sports King" },
+    { src: `${carThree}`, name: "Busy Bond" },
+    { src: `${carFour}`, name: "Toyota Royals" },
+    { src: `${carFive}`, name: "Hahate Mai" },
+    { src: `${carSix}`, name: "Render Pask" },
+    { src: `${carSeven}`, name: "Suzuki" },
+    { src: `${carEight}`, name: "Ferrari" },
+    { src: `${carNine}`, name: "Truck" },
+    { src: `${carTen}`, name: "Super Sonic" },
+    { src: `${carEleven}`, name: "Speed Kill" },
+    { src: `${carTwelve}`, name: "Race Hunter" },
+    { src: `${carThirteen}`, name: "Manila" },
+    { src: `${carFourteen}`, name: "Toyota Crown" },
+    { src: `${carFifteen}`, name: "Entemsy" },
   ];
   return (
-    <div className="my-12" data-aos="zoom-out">
+    <div
+      className="my-12 custom-container overflow-x-hidden"
+      data-aos="zoom-out"
+    >
       <h3 className="text-4xl font-semibold text-center my-12">
         Toy Car Gallery
       </h3>
-      <div className="bg-[#179de5] p-5 shadow-lg shadow-slate-400">
-        <PhotoAlbum layout="rows" photos={photos} />
+      <div className="bg-[#7A1F2B] px-5 py-8 shadow-lg grid lg:grid-cols-4 grid-cols-1 gap-5 items-center shadow-slate-400">
+        {photos.map((photo, index) => (
+          <div
+            key={index}
+            className="bg-slate-100 p-2 lg:transition lg:ease-in lg:hover:scale-110 duration-300 rounded-lg h-64 relative"
+          >
+            <img src={photo.src} alt="" className="w-full h-full" />
+            <div className="absolute top-0 left-0 rounded-lg bg-white transition-opacity opacity-0 hover:opacity-70 w-full h-full flex items-center justify-center">
+              <p className="opacity-100 text-2xl font-bold text-black">
+                {photo.name}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

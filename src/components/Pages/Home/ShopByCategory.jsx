@@ -2,9 +2,11 @@ import { data } from "autoprefixer";
 import React, { useEffect, useState } from "react";
 import ToyCard from "./ToyCard";
 import Aos from "aos";
+import { RotatingLines } from "react-loader-spinner";
 
 const ShopByCategory = () => {
   const [toys, setToys] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [singleToy, setSingleToy] = useState();
   const [active, setActive] = useState("");
 
@@ -26,7 +28,10 @@ const ShopByCategory = () => {
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
-      .then((data) => setToys(data));
+      .then((data) => {
+        setToys(data);
+        setLoading(false);
+      });
   }, [url, active]);
   const handleTab = (value) => {
     setActive(value);
@@ -36,7 +41,10 @@ const ShopByCategory = () => {
     setSingleToy(findToy);
   };
   return (
-    <div className="my-12" data-aos="zoom-in">
+    <div
+      className="my-12 custom-container overflow-x-hidden"
+      data-aos="zoom-in"
+    >
       <h2 className="text-4xl text-center font-semibold mb-10">
         Shop by Category
       </h2>
@@ -72,16 +80,28 @@ const ShopByCategory = () => {
           Truck
         </div>
       </div>
-      <div className="grid lg:grid-cols-3 grid-cols-1 gap-5 px-2 my-8">
-        {toys.map((toy) => (
-          <ToyCard
-            key={toy._id}
-            toy={toy}
-            handleDetails={handleDetails}
-            singleToy={singleToy}
+      {loading ? (
+        <div className="flex items-center justify-center my-8">
+          <RotatingLines
+            strokeColor="#179de5"
+            strokeWidth="8"
+            animationDuration="0.75"
+            width="120"
+            visible={true}
           />
-        ))}
-      </div>
+        </div>
+      ) : (
+        <div className="grid lg:grid-cols-3 grid-cols-1 gap-5 px-2 my-8">
+          {toys?.map((toy) => (
+            <ToyCard
+              key={toy._id}
+              toy={toy}
+              handleDetails={handleDetails}
+              singleToy={singleToy}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
